@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test-deployment
+  name: product-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: test
+      app: product
   template:
     metadata:
       labels:
-        app: test
+        app: product
     spec:
       containers:
         - name: api
-          image: kandit/test-ms:0.4
+          image: kandit/product-ms:0.2
           ports:
-            - containerPort: 3001
+            - containerPort: 8080
           env:
             - name: DB_CONNECTION
               valueFrom:
@@ -27,21 +27,21 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: test-service
+  name: product-service
   labels:
-    app: test-service
+    app: product-service
 spec:
   ports:
-    - port: 3001
+    - port: 80
       name: http
-      targetPort: 3001
+      targetPort: 8080
   selector:
-    app: test
+    app: product
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: test
+  name: product
   namespace: default
   annotations:
     konghq.com/methods: "GET,POST"
@@ -51,24 +51,10 @@ spec:
   rules:
     - http:
         paths:
-          - path: /test
+          - path: /v1/product
             pathType: Prefix
             backend:
               service:
-                name: test-service
+                name: product-service
                 port:
-                  number: 3001
-          - path: /try
-            pathType: Prefix
-            backend:
-              service:
-                name: test-service
-                port:
-                  number: 3001
-          - path: /market/item
-            pathType: Prefix
-            backend:
-              service:
-                name: test-service
-                port:
-                  number: 3001
+                  number: 80

@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docker:build": "docker build --platform=linux/amd64 -t kandit/product-ms:0.2 .",
-    "docker:push": "docker push kandit/product-ms:0.2"
+    "docker:build": "docker build --platform=linux/amd64 -t kandit/product-ms:0.3 .",
+    "docker:push": "docker push kandit/product-ms:0.3"
   },
   "keywords": [],
   "author": "",

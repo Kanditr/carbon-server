@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: kandit/product-ms:0.2
+          image: kandit/product-ms:0.3
           ports:
             - containerPort: 8080
           env:

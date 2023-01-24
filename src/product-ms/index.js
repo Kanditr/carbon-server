@@ -9,10 +9,9 @@ app.use(
   })
 );
 
-// Test endpoint
-app.get("/v1/product", (request, response) => {
-  response.send("Hi /v1/product");
-});
+// Import product route
+const productRoute = require("./routes/product.route");
+app.use("/v1/product", productRoute);
 
 // Port connection
 app.listen(8080, () => {

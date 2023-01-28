@@ -9,6 +9,9 @@ app.use(
   })
 );
 
+var cors = require("cors");
+app.use(cors());
+
 // Import product route
 const productRoute = require("./routes/product.route");
 app.use("/v1/product", productRoute);

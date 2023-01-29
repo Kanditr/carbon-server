@@ -6,14 +6,15 @@
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docker:build": "docker build --platform=linux/amd64 -t kandit/product-ms:0.4 .",
-    "docker:push": "docker push kandit/product-ms:0.4"
+    "docker:build": "docker build --platform=linux/amd64 -t kandit/product-ms:0.6 .",
+    "docker:push": "docker push kandit/product-ms:0.6"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongodb": "^4.13.0"
   },

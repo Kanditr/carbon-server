@@ -2,10 +2,16 @@ const express = require("express");
 const router = express.Router();
 const productService = require("../services/product.service");
 
-// get all products
+// mock - get all products
 router.get("/", (request, response) => {
   const products = productService.getProducts();
   response.status(200).json(products);
+});
+
+// get all products
+router.get("/all", async (request, response) => {
+  const products = await productService.getAllProducts();
+  response.status(200).send(products);
 });
 
 // get one product by id

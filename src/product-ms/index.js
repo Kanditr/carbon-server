@@ -1,6 +1,13 @@
 const express = require("express");
 const app = express();
 
+// env variables
+require("dotenv").config();
+
+// cors
+var cors = require("cors");
+app.use(cors());
+
 // Body parser
 app.use(express.json());
 app.use(
@@ -8,9 +15,6 @@ app.use(
     extended: true,
   })
 );
-
-var cors = require("cors");
-app.use(cors());
 
 // Import product route
 const productRoute = require("./routes/product.route");

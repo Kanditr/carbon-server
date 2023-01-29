@@ -23,7 +23,7 @@ let products = [
   },
 ];
 
-// get all products
+// Mock - get all products
 const getProducts = () => {
   return products;
 
@@ -37,15 +37,31 @@ const getProducts = () => {
 // Mongo connection
 const { MongoClient } = require("mongodb");
 const url = `${process.env.DB_CONNECTION}`;
-const dbName = "test";
-const collectionName = "Product";
+const dbName = "market";
+const collectionName = "product";
+
+// get all products
+async function getAllProducts() {
+  const client = new MongoClient(url);
+  try {
+    await client.connect();
+    console.log("Connected correctly to mongo server");
+    const db = client.db(dbName);
+    const collection = db.collection(collectionName);
+    const result = await collection.find({}).toArray();
+    return result;
+  } catch (err) {
+    console.log(err.stack);
+  }
+  client.close();
+}
 
 // get one product by id
 async function getOneProduct(id) {
   const client = new MongoClient(url);
   try {
     await client.connect();
-    console.log("Connected correctly to server");
+    console.log("Connected correctly to mongo server");
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
     const result = await collection.findOne({ _id: id });
@@ -56,4 +72,4 @@ async function getOneProduct(id) {
   client.close();
 }
 
-module.exports = { getProducts, getOneProduct };
+module.exports = { getProducts, getOneProduct, getAllProducts };

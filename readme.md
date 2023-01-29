@@ -18,3 +18,7 @@
 # Run application locally
 
 1. TBC
+
+# Add new secret
+
+1. kubectl apply -f secret.yaml

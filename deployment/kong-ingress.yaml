@@ -1,0 +1,17 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: carbon-auth
+plugin: key-auth
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongConsumer
+metadata:
+  name: carbon-client
+  annotations:
+    kubernetes.io/ingress.class: kong
+username: carbon-client
+credentials:
+  - carbon-client-apikey
+---
+

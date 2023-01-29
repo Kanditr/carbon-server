@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: product-deployment
+  name: user-deployment
 spec:
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: product
+      app: user
   template:
     metadata:
       labels:
-        app: product
+        app: user
     spec:
       containers:
         - name: api
-          image: kandit/product-ms:0.6
+          image: registry.digitalocean.com/carbon-user/user-ms:0.3
           ports:
             - containerPort: 8080
           env:
@@ -28,21 +28,21 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: product-service
+  name: user-service
   labels:
-    app: product-service
+    app: user-service
 spec:
   ports:
     - port: 80
       name: http
       targetPort: 8080
   selector:
-    app: product
+    app: user
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: product
+  name: user
   namespace: default
   annotations:
     konghq.com/methods: "GET,POST"
@@ -53,10 +53,10 @@ spec:
   rules:
     - http:
         paths:
-          - path: /v1/product
+          - path: /v1/user
             pathType: Prefix
             backend:
               service:
-                name: product-service
+                name: user-service
                 port:
                   number: 80

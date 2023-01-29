@@ -1,0 +1,25 @@
+{
+  "name": "user-ms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker:build": "docker build --platform=linux/amd64 -t user-ms:0.3 .",
+    "docker:tag": "docker tag user-ms:0.3 registry.digitalocean.com/carbon-user/user-ms:0.3",
+    "docker:push": "docker push registry.digitalocean.com/carbon-user/user-ms:0.3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^4.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
